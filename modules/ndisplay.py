@@ -32,3 +32,11 @@ def clear_mem_disp(type):
         for y in range(2):
             for x in range(5):
                 display.set_pixel(x, y, 0)
+
+# Function to Clear Full screen
+def clear_scr():
+    clear_mem_disp("mloc")
+    clear_mem_disp("mcontent")
+    display.set_pixel(2, 2, 0)
+    display.set_pixel(0, 2, 0)
+    display.set_pixel(1, 2, 0)
