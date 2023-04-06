@@ -21,14 +21,11 @@ while True:
         
     if button_b.is_pressed():
         vm.step()
-        ndisplay.clear_mem_disp("mloc")
-        ndisplay.clear_mem_disp("mcontent")
+        ndisplay.clear_scr()
 
-        for loc, val in enumerate([vm.a, vm.b, vm.c]):
-            if (vm.ip + loc) == 0:
-                display.set_pixel(2, 2, 9)
-            else:
-                ndisplay.mem_location(vm.ip + loc)
+        if vm.stepCount < 3:
+            val = [vm.a, vm.b, vm.c][vm.stepCount]
+            ndisplay.mem_location(vm.ip + vm.stepCount)
 
             if val == 0:
                 display.set_pixel(0, 2, 9)
@@ -37,6 +34,15 @@ while True:
             else:
                 ndisplay.mem_content(val)
 
-            sleep(15000)
-            ndisplay.clear_scr()
-        
+        if vm.stepCount >= 2:
+            vm.stepCount = 0
+        else:
+            vm.stepCount += 1
+
+        sleep(500)
+
+
+    if button_a.is_pressed():
+        vm.exec()
+
+    
