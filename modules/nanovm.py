@@ -1,10 +1,11 @@
 # URSIC based NanoByte VM
 from microbit import display
+import helpers
 
 class NanoByteVM:
     def __init__(self):
         self.ip = 0
-        self.memory = [0] * 1023
+        self.memory = [0] * 1024
         self.isRunning = True
         self.a = -1
         self.b = -1
@@ -12,6 +13,7 @@ class NanoByteVM:
         self.stepCount = 0
         
     def load(self, program):
+        program = helpers.assemble(program)
         self.memory[:len(program)] = program
 
     def step(self):

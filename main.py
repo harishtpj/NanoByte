@@ -2,12 +2,20 @@
 from microbit import *
 import ndisplay, nanovm
 
-program = [15, 17, -1, 17, -1, -1, 16, 1, -1, 16, 3, -1, 15, 15,
-            0, 0, -1, 72, 101, 108, 108, 111, 44, 32, 119, 111,
-            114, 108, 100, 33, 10, 0]
+program = """
+15 17 -1
+17 -1 -1
+16 1 -1
+16 3 -1
+15 15 0
+$0 
+$-1
+.Hello, world!
+$0
+""".strip()
 
 vm = nanovm.NanoByteVM()
-display.scroll("NanoByte is Ready!")
+display.scroll("nB is Ready!")
 
 vm.load(program)
 display.scroll("Program Loaded.")
@@ -27,10 +35,8 @@ while True:
             val = [vm.a, vm.b, vm.c][vm.stepCount]
             ndisplay.mem_location(vm.ip + vm.stepCount)
 
-            if val == 0:
-                display.set_pixel(0, 2, 9)
-            elif val == -1:
-                display.set_pixel(1, 2, 9)
+            if val == -1:
+                display.set_pixel(4, 1, 9)
             else:
                 ndisplay.mem_content(val)
 

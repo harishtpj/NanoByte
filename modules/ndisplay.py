@@ -1,6 +1,5 @@
 # Display methods for memory
 from microbit import display
-import helpers
 
 # Function to display a specific memory location
 def mem_location(mloc):
@@ -18,7 +17,7 @@ def mem_content(mcontent):
     for p in range(len(mcontent)):
         if mcontent[p] == '1':
             if p > 4:
-                display.set_pixel(p - 4, 1, 9)
+                display.set_pixel(p - 5, 1, 9)
             else:
                 display.set_pixel(p, 0, 9)
 
@@ -37,6 +36,4 @@ def clear_mem_disp(type):
 def clear_scr():
     clear_mem_disp("mloc")
     clear_mem_disp("mcontent")
-    display.set_pixel(2, 2, 0)
-    display.set_pixel(0, 2, 0)
-    display.set_pixel(1, 2, 0)
+    display.set_pixel(4, 1, 0)
