@@ -11,6 +11,7 @@ class NanoByteVM:
         self.b = -1
         self.c = -1
         self.stepCount = 0
+        self.stdout = ""
         
     def load(self, program):
         program = helpers.assemble(program)
@@ -19,7 +20,7 @@ class NanoByteVM:
     def step(self):
         if self.ip == -1:
             self.isRunning = False
-            display.show("Program completed")
+            display.scroll("Program completed")
         else:
             self.a = self.memory[self.ip]
             self.b = self.memory[self.ip + 1]
@@ -28,9 +29,11 @@ class NanoByteVM:
     def exec(self):
         self.isRunning = True
         if self.a == -1:
-            raise NotImplemented("Not yet Input Feature Created")
+            display.scroll(self.stdout)
+            self.stdout = ""
+            self.ip = self.c - 3
         elif self.b == -1:
-            display.scroll(chr(self.memory[self.a]))
+            self.stdout += chr(self.memory[self.a])
         else:
             self.memory[self.b] -= self.memory[self.a]
             if self.memory[self.b] <= 0:

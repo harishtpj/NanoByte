@@ -1,23 +1,11 @@
 # NanoByte - A Simple 8bit processor
 from microbit import *
-import ndisplay, nanovm
-
-program = """
-15 17 -1
-17 -1 -1
-16 1 -1
-16 3 -1
-15 15 0
-$0 
-$-1
-.Hello, world!
-$0
-""".strip()
+import ndisplay, nanovm, programs
 
 vm = nanovm.NanoByteVM()
 display.scroll("nB is Ready!")
 
-vm.load(program)
+vm.load(programs.nBPrint.hi())
 display.scroll("Program Loaded.")
 
 while True:
@@ -25,6 +13,7 @@ while True:
         display.set_pixel(4, 2, 9)
     else:
         display.set_pixel(4, 2, 0)
+        ndisplay.clear_scr()
         break
         
     if button_b.is_pressed():
